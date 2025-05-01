@@ -10,7 +10,7 @@ const error = ref(null)
 const hoveredFondo = ref(null)
 const tooltipPosition = ref({ x: 0, y: 0 })
 
-// Configuración del año actual
+// Configuración del año actual cabmio
 const currentYear = dayjs().year()
 const months = [
   'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
