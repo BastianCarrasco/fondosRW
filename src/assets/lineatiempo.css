@@ -1,0 +1,220 @@
+.main-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .table-container {
+    width: 100%;
+    border: none;
+    border-radius: 0;
+  }
+  
+  .timeline-header {
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+  
+  .timeline-months {
+    width: calc(100% - 2rem);
+    margin: 0 1rem;
+  }
+  
+  .fondos-table {
+    width: 100%;
+  }
+  
+  .timeline-cell {
+    width: 70%;
+  }
+  
+  /* Ajustes para pantallas muy grandes */
+  @media (min-width: 1600px) {
+    .fondos-table {
+      width: 95%;
+      margin: 0 auto;
+    }
+  
+    .timeline-months {
+      width: calc(95% - 2rem);
+    }
+  }
+  
+  /* Resto de estilos permanecen iguales */
+  .timeline-line {
+    position: relative;
+    height: 4px;
+    background-color: #e2f0ee;
+    margin: 0 1rem;
+  }
+  
+  .today-marker {
+    position: absolute;
+    top: -6px;
+    width: 2px;
+    height: 16px;
+    background-color: #ef4444;
+  }
+  
+  .today-label {
+    position: absolute;
+    top: -24px;
+    left: -12px;
+    background-color: #ef4444;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+  
+  .fondos-table th {
+    background-color: #f1f5f9;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .fondos-table td {
+    padding: 1rem;
+    border-top: 1px solid #e2e8f0;
+  }
+  
+  .fondo-row:hover {
+    background-color: #14304d;
+  }
+  
+  .fondo-name a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .fondo-name a:hover {
+    text-decoration: underline;
+  }
+  
+  .timeline-bar-container {
+    position: relative;
+    height: 20px;
+    background-color: #f1f5f9;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .timeline-bar {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-color: #3b82f6;
+    border-radius: 4px;
+  }
+  
+  .tooltip {
+    position: fixed;
+    z-index: 50;
+    background-color: rgb(0, 0, 0);
+    border: 1px solid #ffffff;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    pointer-events: none;
+    color: white;
+  }
+  
+  .loading,
+  .error {
+    width: 100%;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .table-container {
+    width: 100vw;
+    /* usar toda la pantalla */
+    position: relative;
+    overflow-x: auto;
+  }
+  
+  .today-marker {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #ef4444;
+    z-index: 10;
+  }
+  
+  .today-label {
+    position: absolute;
+    top: -20px;
+    left: -12px;
+    background-color: #ef4444;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+  
+  .timeline-header {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    z-index: 5;
+  }
+  
+  .timeline-months {
+    display: flex;
+    width: 100%;
+  }
+  
+  .timeline-month {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+  
+  .today-line {
+    position: absolute;
+    top: 0;
+    height: 2px;
+    background-color: red;
+    width: 2px;
+  }
+  
+  .fondo-button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    font-size: inherit;
+    position: relative;
+  }
+  
+  .fondo-button:hover {
+    color: #0056b3;
+  }
+  .current-date{
+    background-color: rgb(0, 121, 46);
+    color: white;
+    
+  }
+  
+  .fondo-name, .plataforma {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    height: 100%;            /* Asegura que la celda ocupe toda la altura */
+  }
+  
+  
+  
