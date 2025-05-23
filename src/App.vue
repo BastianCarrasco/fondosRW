@@ -61,9 +61,12 @@ const {
               @mousemove="showTooltip(fondo, $event)"
               @mouseleave="hideTooltip">
             <td class="fondo-name">
-              <button class="fondo-button" @click="openUrl(fondo.url)">
-                {{ fondo.nombre }}
-              </button>
+              <button 
+  class="fondo-button" 
+  @click="openUrl(fondo.url, fondo.id)"
+>
+  {{ fondo.nombre }}
+</button>
             </td>
             <td>{{ fondo.plataforma }}</td>
             <td class="timeline-cell">
