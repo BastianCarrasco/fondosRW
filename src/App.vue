@@ -1,6 +1,6 @@
 <script setup>
-import "./assets/lineatiempo.css";
-import { useFondos } from "@/composables/useFondos.js";
+import './assets/lineatiempo.css'
+import { useFondos } from '@/composables/useFondos.js'
 
 const {
   fondos,
@@ -14,8 +14,8 @@ const {
   showTooltip,
   hideTooltip,
   openUrl,
-  dayjs,
-} = useFondos();
+  dayjs
+} = useFondos()
 </script>
 
 <template>
@@ -43,11 +43,12 @@ const {
             <th class="timeline-cell relative">
               <div class="timeline-months absolute top-0 left-0 w-full h-full pointer-events-none z-10 flex">
                 <div v-for="(month, index) in months" :key="index"
-                  class="timeline-month text-center text-sm border-r border-gray-200"
-                  :class="{ 'bg-green-300': index === currentMonth }" :style="{ width: `${100 / 12}%` }">
+                     class="timeline-month text-center text-sm border-r border-gray-200"
+                     :class="{ 'bg-green-300': index === currentMonth }"
+                     :style="{ width: `${100 / 12}%` }">
                   {{ month }}
                   <div v-if="index === currentMonth" class="current-date">
-                    {{ dayjs().format("DD/MM/YYYY") }}
+                    {{ dayjs().format('DD/MM/YYYY') }}
                   </div>
                 </div>
               </div>
@@ -56,10 +57,11 @@ const {
         </thead>
 
         <tbody>
-          <tr v-for="fondo in fondos" :key="fondo.id" class="fondo-row" @mousemove="showTooltip(fondo, $event)"
-            @mouseleave="hideTooltip">
+          <tr v-for="fondo in fondos" :key="fondo.id" class="fondo-row"
+              @mousemove="showTooltip(fondo, $event)"
+              @mouseleave="hideTooltip">
             <td class="fondo-name">
-              <button class="fondo-button" @click="openUrl(fondo.url, fondo.id)">
+              <button class="fondo-button" @click="openUrl(fondo.url)">
                 {{ fondo.nombre }}
               </button>
             </td>
@@ -67,15 +69,8 @@ const {
             <td class="timeline-cell">
               <div class="timeline-bar-container">
                 <div class="timeline-bar" :style="{
-                  left: `${(fondo.startMonth + fondo.startDay / 30) * (100 / 12)
-                    }%`,
-                  width: `${Math.max(
-                    2,
-                    (fondo.endMonth -
-                      fondo.startMonth +
-                      (fondo.endDay - fondo.startDay) / 30) *
-                    (100 / 12)
-                  )}%`,
+                  left: `${(fondo.startMonth + (fondo.startDay / 30)) * (100 / 12)}%`,
+                  width: `${Math.max(2, ((fondo.endMonth - fondo.startMonth) + (fondo.endDay - fondo.startDay) / 30) * (100 / 12))}%`
                 }"></div>
               </div>
             </td>
@@ -87,18 +82,12 @@ const {
     <!-- Tooltip -->
     <div v-if="hoveredFondo" class="tooltip" :style="{
       left: `${tooltipPosition.x}px`,
-      top: `${tooltipPosition.y}px`,
+      top: `${tooltipPosition.y}px`
     }">
       <h3>{{ hoveredFondo.nombre }}</h3>
       <p><strong>Plataforma:</strong> {{ hoveredFondo.plataforma }}</p>
-      <p>
-        <strong>Inicio:</strong>
-        {{ dayjs(hoveredFondo.fechainicio).format("DD/MM/YYYY") }}
-      </p>
-      <p>
-        <strong>Cierre:</strong>
-        {{ dayjs(hoveredFondo.fechacierre).format("DD/MM/YYYY") }}
-      </p>
+      <p><strong>Inicio:</strong> {{ dayjs(hoveredFondo.fechainicio).format('DD/MM/YYYY') }}</p>
+      <p><strong>Cierre:</strong> {{ dayjs(hoveredFondo.fechacierre).format('DD/MM/YYYY') }}</p>
     </div>
   </main>
 </template>
