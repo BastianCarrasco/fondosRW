@@ -13,6 +13,7 @@ export function useFondos() {
   const currentYear = dayjs().year()
   const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
 
+  // Función para obtener los fondos
   const fetchFondos = async () => {
     try {
       const response = await axios.get('https://backendrw-production.up.railway.app/fondos')
@@ -28,6 +29,30 @@ export function useFondos() {
     } finally {
       loading.value = false
     }
+  }
+
+  // Función para incrementar el contador
+  const incrementarContador = async (id) => {
+    try {
+      // Actualiza en el backend
+      await axios.patch(`https://backendrw-production.up.railway.app/fondos/${id}/incrementar`)
+      
+      // Actualiza localmente
+      const fondoIndex = fondos.value.findIndex(f => f.id === id)
+      if (fondoIndex !== -1) {
+        fondos.value[fondoIndex].contador += 1
+      }
+    } catch (err) {
+      console.error('Error al incrementar contador:', err)
+    }
+  }
+
+  // Función modificada para abrir URL e incrementar contador
+  const openUrl = (url, id) => {
+    if (id) {
+      incrementarContador(id)
+    }
+    window.open(url, '_blank')
   }
 
   const todayPosition = computed(() => {
@@ -50,10 +75,6 @@ export function useFondos() {
     hoveredFondo.value = null
   }
 
-  const openUrl = (url) => {
-    window.open(url, '_blank')
-  }
-
   onMounted(fetchFondos)
 
   return {
@@ -68,6 +89,7 @@ export function useFondos() {
     showTooltip,
     hideTooltip,
     openUrl,
-    dayjs
+    dayjs,
+    incrementarContador
   }
 }
