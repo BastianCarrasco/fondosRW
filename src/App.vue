@@ -1,5 +1,6 @@
 <script setup>
 import './assets/lineatiempo.css'
+import { computed } from 'vue'
 import { useFondos } from '@/composables/useFondos.js'
 
 const {
@@ -16,6 +17,11 @@ const {
   openUrl,
   dayjs
 } = useFondos()
+
+// Ordenar por visitas (contador) de mayor a menor
+const fondosOrdenados = computed(() =>
+  [...fondos.value].sort((a, b) => b.contador - a.contador)
+)
 </script>
 
 <template>
@@ -42,11 +48,16 @@ const {
             <th class="text-left">Plataforma</th>
             <th class="text-left">Visitas</th>
             <th class="timeline-cell relative">
-              <div class="timeline-months absolute top-0 left-0 w-full h-full pointer-events-none z-10 flex">
-                <div v-for="(month, index) in months" :key="index"
-                     class="timeline-month text-center text-sm border-r border-gray-200"
-                     :class="{ 'bg-green-300': index === currentMonth }"
-                     :style="{ width: `${100 / 12}%` }">
+              <div
+                class="timeline-months absolute top-0 left-0 w-full h-full pointer-events-none z-10 flex"
+              >
+                <div
+                  v-for="(month, index) in months"
+                  :key="index"
+                  class="timeline-month text-center text-sm border-r border-gray-200"
+                  :class="{ 'bg-green-300': index === currentMonth }"
+                  :style="{ width: `${100 / 12}%` }"
+                >
                   {{ month }}
                   <div v-if="index === currentMonth" class="current-date">
                     {{ dayjs().format('DD/MM/YYYY') }}
@@ -58,22 +69,35 @@ const {
         </thead>
 
         <tbody>
-          <tr v-for="fondo in fondos" :key="fondo.id" class="fondo-row"
-              @mousemove="showTooltip(fondo, $event)"
-              @mouseleave="hideTooltip">
-            <td class="fondo-name">
+          <tr
+            v-for="(fondo, index) in fondosOrdenados"
+            :key="fondo.id"
+            class="fondo-row"
+            @mousemove="showTooltip(fondo, $event)"
+            @mouseleave="hideTooltip"
+          >
+            <td class="fondo-name flex items-center gap-2">
+         
               <button class="fondo-button" @click="openUrl(fondo.url, fondo.id)">
                 {{ fondo.nombre }}
               </button>
             </td>
             <td>{{ fondo.plataforma }}</td>
-            <td>{{ fondo.contador }}</td>
+            <td class="medallas">
+              <span v-if="index === 0">🥇</span>
+              <span v-else-if="index === 1">🥈</span>
+              <span v-else-if="index === 2">🥉</span>
+              <span v-else>#{{ index + 1 }}</span>
+            </td>
             <td class="timeline-cell">
               <div class="timeline-bar-container">
-                <div class="timeline-bar" :style="{
-                  left: `${(fondo.startMonth + (fondo.startDay / 30)) * (100 / 12)}%`,
-                  width: `${Math.max(2, ((fondo.endMonth - fondo.startMonth) + (fondo.endDay - fondo.startDay) / 30) * (100 / 12))}%`
-                }"></div>
+                <div
+                  class="timeline-bar"
+                  :style="{
+                    left: `${(fondo.startMonth + (fondo.startDay / 30)) * (100 / 12)}%`,
+                    width: `${Math.max(2, ((fondo.endMonth - fondo.startMonth) + (fondo.endDay - fondo.startDay) / 30) * (100 / 12))}%`
+                  }"
+                ></div>
               </div>
             </td>
           </tr>
@@ -82,10 +106,14 @@ const {
     </div>
 
     <!-- Tooltip -->
-    <div v-if="hoveredFondo" class="tooltip" :style="{
-      left: `${tooltipPosition.x}px`,
-      top: `${tooltipPosition.y}px`
-    }">
+    <div
+      v-if="hoveredFondo"
+      class="tooltip"
+      :style="{
+        left: `${tooltipPosition.x}px`,
+        top: `${tooltipPosition.y}px`
+      }"
+    >
       <h3>{{ hoveredFondo.nombre }}</h3>
       <p><strong>Plataforma:</strong> {{ hoveredFondo.plataforma }}</p>
       <p><strong>Inicio:</strong> {{ dayjs(hoveredFondo.fechainicio).format('DD/MM/YYYY') }}</p>
@@ -117,7 +145,7 @@ const {
 .fondo-button {
   background: none;
   border: none;
-  color: #007bff;
+  color: #ffffff;
   text-decoration: underline;
   cursor: pointer;
   padding: 0;
@@ -126,6 +154,10 @@ const {
 
 .fondo-button:hover {
   color: #0056b3;
+}
+.medallas {
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 @keyframes spin {
