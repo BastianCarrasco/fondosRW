@@ -40,6 +40,7 @@ const {
           <tr>
             <th class="text-left">Nombre del Fondo</th>
             <th class="text-left">Plataforma</th>
+            <th class="text-left">Visitas</th>
             <th class="timeline-cell relative">
               <div class="timeline-months absolute top-0 left-0 w-full h-full pointer-events-none z-10 flex">
                 <div v-for="(month, index) in months" :key="index"
@@ -61,14 +62,12 @@ const {
               @mousemove="showTooltip(fondo, $event)"
               @mouseleave="hideTooltip">
             <td class="fondo-name">
-              <button 
-  class="fondo-button" 
-  @click="openUrl(fondo.url, fondo.id)"
->
-  {{ fondo.nombre }}
-</button>
+              <button class="fondo-button" @click="openUrl(fondo.url, fondo.id)">
+                {{ fondo.nombre }}
+              </button>
             </td>
             <td>{{ fondo.plataforma }}</td>
+            <td>{{ fondo.contador }}</td>
             <td class="timeline-cell">
               <div class="timeline-bar-container">
                 <div class="timeline-bar" :style="{
@@ -91,6 +90,7 @@ const {
       <p><strong>Plataforma:</strong> {{ hoveredFondo.plataforma }}</p>
       <p><strong>Inicio:</strong> {{ dayjs(hoveredFondo.fechainicio).format('DD/MM/YYYY') }}</p>
       <p><strong>Cierre:</strong> {{ dayjs(hoveredFondo.fechacierre).format('DD/MM/YYYY') }}</p>
+      <p><strong>Visitas:</strong> {{ hoveredFondo.contador }}</p>
     </div>
   </main>
 </template>
@@ -112,6 +112,20 @@ const {
   border-top-color: #007bff;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
+}
+
+.fondo-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+}
+
+.fondo-button:hover {
+  color: #0056b3;
 }
 
 @keyframes spin {
