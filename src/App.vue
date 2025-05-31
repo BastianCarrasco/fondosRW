@@ -35,16 +35,31 @@ const plataformasDisponibles = computed(() =>
 
 const fondosFiltradosYOrdenados = computed(() => {
   let resultado = [...fondos.value]
+
   if (filtroPlataforma.value) {
     resultado = resultado.filter(f => f.plataforma === filtroPlataforma.value)
   }
+
   switch (filtroOrden.value) {
-    case 'visitas': resultado.sort((a, b) => b.contador - a.contador); break
-    case 'fecha': resultado.sort((a, b) => dayjs(a.fechacierre).diff(dayjs()) - dayjs(b.fechacierre).diff(dayjs())); break
-    case 'alfabetico': resultado.sort((a, b) => a.nombre.localeCompare(b.nombre)); break
+    case 'visitas':
+      resultado.sort((a, b) => b.contador - a.contador)
+      break
+    case 'fecha':
+      resultado.sort((a, b) =>
+        dayjs(a.fechacierre).diff(dayjs()) - dayjs(b.fechacierre).diff(dayjs())
+      )
+      break
+    case 'alfabetico-asc':
+      resultado.sort((a, b) => a.nombre.localeCompare(b.nombre))
+      break
+    case 'alfabetico-desc':
+      resultado.sort((a, b) => b.nombre.localeCompare(a.nombre))
+      break
   }
+
   return resultado
 })
+
 </script>
 
 <template>

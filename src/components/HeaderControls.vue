@@ -44,7 +44,8 @@ const props = defineProps({
         >
           <option value="visitas">Visitas</option>
           <option value="fecha">Fecha</option>
-          <option value="alfabetico">A-Z</option>
+          <option value="alfabetico-asc">A-Z</option>
+          <option value="alfabetico-desc">Z-A</option>
         </select>
       </div>
     </div>

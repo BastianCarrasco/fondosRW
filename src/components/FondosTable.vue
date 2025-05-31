@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps, computed } from 'vue'
+import '../assets/tabla.css'
 
 const props = defineProps({
   fondos: Array,
@@ -68,9 +69,9 @@ const calculateVigency = (fondo, currentMonth) => {
           </td>
           <td class="text-center">{{ fondo.plataforma }}</td>
           <td class="text-center">
-            <span v-if="index === 0">🥇</span>
-            <span v-else-if="index === 1">🥈</span>
-            <span v-else-if="index === 2">🥉</span>
+            <span class="medalla" v-if="index === 0">🥇</span>
+            <span class="medalla" v-else-if="index === 1">🥈</span>
+            <span class="medalla" v-else-if="index === 2">🥉</span>
             <span v-else>#{{ index + 1 }}</span>
           </td>
           <td class="timeline-cell">
@@ -91,77 +92,24 @@ const calculateVigency = (fondo, currentMonth) => {
 </template>
 
 <style scoped>
-.fondos-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.fondos-table th {
-  padding: 0.75rem;
-  background-color: #f8f9fa;
-  font-weight: 600;
-  border-bottom: 2px solid #dee2e6;
-}
-
-.fondos-table td {
-  padding: 0.75rem;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.fondo-button {
-  background: none;
-  border: none;
-  padding: 0;
-  color: #007bff;
-  cursor: pointer;
-  text-align: left;
-}
-
-.fondo-button:hover {
-  text-decoration: underline;
-}
-
-.timeline-cell {
-  padding: 0;
+.table-container {
+  max-height: 600px;
+  overflow-y: auto;
   position: relative;
-  height: 40px;
 }
 
-.timeline-bar-container {
-  position: relative;
-  height: 100%;
-  width: 100%;
+.fondos-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 20;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
 }
 
-.timeline-bar {
-  position: absolute;
-  height: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: 4px;
+.medalla {
+  font-size: 2rem;
 }
 
-.timeline-months {
-  height: 100%;
-}
 
-.timeline-month {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.current-date {
-  font-size: 0.75rem;
-  color: #333;
-}
 </style>

@@ -14,6 +14,6 @@ const props = defineProps({
     <p><strong>Plataforma:</strong> {{ fondo.plataforma }}</p>
     <p><strong>Inicio:</strong> {{ dayjs(fondo.fechainicio).format('DD/MM/YYYY') }}</p>
     <p><strong>Cierre:</strong> {{ dayjs(fondo.fechacierre).format('DD/MM/YYYY') }}</p>
-    <p><strong>Visitas:</strong> {{ fondo.contador }}</p>
+    <!-- <p><strong>Visitas:</strong> {{ fondo.contador }}</p> -->
   </div>
 </template>
